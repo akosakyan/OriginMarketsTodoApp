@@ -1,0 +1,20 @@
+<mat-toolbar class="mat-elevation-z6">
+  <div class="mat-toolbar-content">
+    <button mat-icon-button [routerLink]="['/']" style="margin-top: -5px">
+      <!--<img class="app-logo" src="../../assets/spider-logo.jpg" alt="logo">-->
+    </button>
+
+    <div class="flex-spacer"></div>
+
+    <button mat-mini-fab (click)="onToggleAppTheme()" color="accent" class="theme-toggle-btn">
+      <mat-icon>
+        {{ appTheme === appThemeValues.Light ? 'light_mode' : 'dark_mode' }}
+      </mat-icon>
+    </button>
+    <button mat-flat-button [routerLink]="['/github']">GitHub</button>
+  </div>
+</mat-toolbar>
+
+<section class="content-container">
+  <router-outlet></router-outlet>
+</section>

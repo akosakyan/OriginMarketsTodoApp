@@ -1,0 +1,17 @@
+<mat-form-field class="search-form-field">
+  <mat-label>Search by label or description</mat-label>
+  <input matInput type="text" [formControl]="searchTermControl">
+  <button *ngIf="searchTermControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="onClearSearchTermInput()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-chip-list aria-label="category selection" class="category-chip-list" [selectable]="true">
+  <mat-chip
+    *ngFor="let category of categories"
+    [selected]="category === categoryControl.value"
+    (click)="onCategorySelected(category)"
+  >
+    {{ category }}
+  </mat-chip>
+</mat-chip-list>

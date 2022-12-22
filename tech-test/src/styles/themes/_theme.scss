@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@use '../abstracts/typography' as typography;
+
+$app-primary-palette: mat.define-palette(mat.$cyan-palette);
+$app-accent-palette: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
+$app-warn-palette: mat.define-palette(mat.$red-palette, A200, A100, A400);
+
+$app-light-theme: mat.define-light-theme((
+  color: (
+    primary: $app-primary-palette,
+    accent: $app-accent-palette,
+    warn: $app-warn-palette,
+  ),
+));
+
+$app-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $app-primary-palette,
+    accent: $app-accent-palette,
+    warn: $app-warn-palette,
+  ),
+));

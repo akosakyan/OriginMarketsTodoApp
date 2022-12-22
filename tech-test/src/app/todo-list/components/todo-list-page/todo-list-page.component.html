@@ -1,0 +1,67 @@
+<div mat-subheader class="todo-list-filters-subheader">Filters</div>
+<app-todo-list-filters
+  [categories]="categories"
+  [selectedCategory]="filtersCategory$ | async"
+  [searchTerm]="filtersSearchTerm$ | async"
+  (filtersChanged)="onFiltersChanged($event)"
+></app-todo-list-filters>
+
+<mat-divider></mat-divider>
+
+<mat-list class="todo-list-container">
+  <!-- Incomplete Todos Block -->
+  <div mat-subheader class="todo-list-subheader todo-list-subheader-incomplete">
+    <div>Incomplete</div>
+    <div>
+      <div class="add-event">
+        <button mat-mini-fab [color]="null" (click)="onAddTodo()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-list-item
+    class="list-todo-item mat-elevation-z3"
+    *ngFor="let todo of incompleteTodos$ | async; trackBy: todoItemsTrackByFn"
+  >
+    <mat-icon mat-list-icon>{{ todoCategoryMatIconMap[todo.category] }}</mat-icon>
+    <div mat-line>{{ todo.label }}</div>
+    <div mat-line> {{ todo.description }} </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ todo: todo }">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-list-item>
+
+  <!-- Completed Todos Block -->
+  <div mat-subheader class="todo-list-subheader">Completed</div>
+  <mat-list-item
+    class="list-todo-item mat-elevation-z1"
+    *ngFor="let todo of completedTodos$ | async; trackBy: todoItemsTrackByFn"
+  >
+    <mat-icon mat-list-icon>done</mat-icon>
+    <div mat-line>{{ todo.label }}</div>
+    <div mat-line> {{ todo.description }} </div>
+    <div mat-line> {{ todo.done }} </div>
+  </mat-list-item>
+</mat-list>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-todo="todo">
+    <button mat-menu-item (click)="onDeleteTodo(todo.id)">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+    <button mat-menu-item (click)="onEditTodo(todo)">
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item (click)="onMarkTodoAsDone(todo.id)">
+      <mat-icon>done</mat-icon>
+      <span>Mark As Done</span>
+    </button>
+    <button mat-menu-item disabled (click)="onDuplicate(todo)">
+      <mat-icon>content_copy</mat-icon>
+      <span>Duplicate</span>
+    </button>
+  </ng-template>
+</mat-menu>

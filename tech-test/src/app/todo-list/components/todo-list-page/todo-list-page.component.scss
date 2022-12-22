@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use 'abstracts/colors';
+
+.todo-list-filters-subheader {
+  font-size: 18px;
+}
+
+app-todo-list-filters {
+  margin-bottom: 20px;
+}
+
+.todo-list-container {
+  padding: 5px;
+
+  .todo-list-subheader {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+
+  .empty-todos-list-placeholder {
+    font-size: 14px;
+  }
+
+  .todo-list-subheader-incomplete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .list-todo-item {
+    margin-top: 8px;
+    border: 1px solid map.get(colors.$colors, 'primary-lighter');
+    border-radius: 5px;
+
+    &:hover {
+      background-color: rgba(232,234,237,.04);
+    }
+  }
+}

@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+:host::ng-deep {
+  button.theme-toggle-btn {
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.mat-toolbar-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 84px 40px 40px;
+}
+
+//.app-logo {
+//  vertical-align: middle;
+//  width: 35px;
+//  height: 35px;
+//  border-radius: 50%;
+//  border: 2px solid lightgrey;
+//  object-fit: cover;
+//}

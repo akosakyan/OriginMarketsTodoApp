@@ -1,0 +1,20 @@
+@use 'node_modules/@angular/material' as mat;
+@use 'abstracts/typography' as typography;
+@use 'themes/theme' as theme;
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: typography.$font-family;
+  transition: background-color 350ms ease;
+}
+
+@include mat.core(typography.$typography-config);
+
+.todos-light-theme {
+  @include mat.all-component-themes(theme.$app-light-theme);
+}
+
+.todos-dark-theme {
+  @include mat.all-component-themes(theme.$app-dark-theme);
+}
