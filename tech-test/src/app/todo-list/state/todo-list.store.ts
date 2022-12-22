@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { switchMap, tap } from 'rxjs/operators';
+import { concatMap, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { format } from 'date-fns';
@@ -153,7 +153,7 @@ export class TodoListStore extends ComponentStore<TodoListState> {
 
   readonly createTodo = this.effect<CreateTodoDto>(
     (origin$) => origin$.pipe(
-      switchMap((createTodoDto) => this.todoService.create(createTodoDto).pipe(
+      concatMap((createTodoDto) => this.todoService.create(createTodoDto).pipe(
         tapResponse(
           (createdTodo) => {
             this.addOneTodoEntity(createdTodo);
@@ -169,7 +169,7 @@ export class TodoListStore extends ComponentStore<TodoListState> {
 
   readonly updateTodo = this.effect<{ id: TodoEntityModel['id']; updateTodoDto: UpdateTodoDto }>(
     (origin$) => origin$.pipe(
-      switchMap(({ id, updateTodoDto }) => this.todoService.update(id, updateTodoDto).pipe(
+      concatMap(({ id, updateTodoDto }) => this.todoService.update(id, updateTodoDto).pipe(
         tapResponse(
           (updatedTodo) => {
             this.updateOneTodoEntity({ id, changes: updatedTodo });
@@ -185,7 +185,7 @@ export class TodoListStore extends ComponentStore<TodoListState> {
 
   readonly deleteTodo = this.effect<TodoEntityModel['id']>(
     (origin$) => origin$.pipe(
-      switchMap((id) => this.todoService.delete(id).pipe(
+      concatMap((id) => this.todoService.delete(id).pipe(
         tapResponse(
           () => {
             this.removeOneTodoEntity(id);
@@ -200,7 +200,7 @@ export class TodoListStore extends ComponentStore<TodoListState> {
   );
 
   readonly markTodoAsDone = this.effect<TodoEntityModel['id']>((origin$) => origin$.pipe(
-    switchMap((id) => this.todoService.update(id, { done: format(new Date(), 'dd-MM-yyyy') }).pipe(
+    concatMap((id) => this.todoService.update(id, { done: format(new Date(), 'dd-MM-yyyy') }).pipe(
       tapResponse(
         () => {
           this.updateOneTodoEntity({ id, changes: { done: true } });
